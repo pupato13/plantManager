@@ -2,12 +2,12 @@ import React from "react";
 import { View, Text, StyleSheet, SafeAreaView, Image } from "react-native";
 
 import wateringImg from "../assets/watering.png";
-import { Button } from "../components/Button";
+import Button from "../components/Button";
 import colors from "../styles/colors";
 
 const Welcome = () => {
     return (
-        <SafeAreaView>
+        <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
                 <Text style={styles.title}>
                     Gerencie{"\n"}
@@ -19,7 +19,7 @@ const Welcome = () => {
                     Nao esqueca mais de regar suas plantas. Nos cuidamos de
                     lembrar voce sempre que precisar.
                 </Text>
-                {/* <Button text="Avancar" /> */}
+                <Button text="Avancar" />
             </View>
         </SafeAreaView>
     );
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: "center",
-        justifyContent: "flex-end",
+        justifyContent: "space-between",
     },
     title: {
         fontSize: 32,

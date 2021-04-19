@@ -6,23 +6,23 @@ interface IButtonProps {
     text: string;
 }
 
-export function Button({ text }: IButtonProps) {
+const Button: React.FC<IButtonProps> = ({ text }) => {
     return (
         <TouchableOpacity style={styles.button} activeOpacity={0.6}>
             <Text style={styles.buttonText}>{text}</Text>
         </TouchableOpacity>
     );
-}
+};
 
 const styles = StyleSheet.create({
     button: {
         backgroundColor: colors.green,
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: 16,
+        paddingHorizontal: 16,
+        borderRadius: 8,
         marginBottom: 8,
         height: 56,
-        width: 56,
     },
     buttonText: {
         color: colors.white,
@@ -30,3 +30,5 @@ const styles = StyleSheet.create({
         fontSize: 24,
     },
 });
+
+export default Button;
