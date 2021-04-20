@@ -19,7 +19,7 @@ const Welcome = () => {
                     Don't forget to water your plants. We take care to remember
                     you whenever you need
                 </Text>
-                <Button text="Avancar" />
+                <Button text="Next" />
             </View>
         </SafeAreaView>
     );
