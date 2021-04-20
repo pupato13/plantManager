@@ -10,14 +10,14 @@ const Welcome = () => {
         <SafeAreaView style={{ flex: 1 }}>
             <View style={styles.container}>
                 <Text style={styles.title}>
-                    Gerencie{"\n"}
-                    suas plantas{"\n"}
-                    de forma facil
+                    Manage{"\n"}
+                    your plants{"\n"}
+                    easily
                 </Text>
                 <Image source={wateringImg} style={styles.image} />
                 <Text style={styles.subtitle}>
-                    Nao esqueca mais de regar suas plantas. Nos cuidamos de
-                    lembrar voce sempre que precisar.
+                    Don't forget to water your plants. We take care to remember
+                    you whenever you need
                 </Text>
                 <Button text="Avancar" />
             </View>
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: "center",
-        justifyContent: "space-between",
+        justifyContent: "space-around",
     },
     title: {
         fontSize: 32,
