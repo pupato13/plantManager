@@ -5,7 +5,7 @@ import {
     Jost_600SemiBold,
 } from "@expo-google-fonts/jost";
 import AppLoading from "expo-app-loading";
-import Welcome from "./src/screens/Welcome";
+import Routes from "./src/routes";
 
 export default function App() {
     const [isFontsLoaded] = useFonts({
@@ -17,5 +17,5 @@ export default function App() {
         return <AppLoading />;
     }
 
-    return <Welcome />;
+    return <Routes />;
 }
