@@ -46,9 +46,7 @@ const UserIdentification = () => {
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
             >
                 <View style={styles.wrapper}>
-                    <TouchableWithoutFeedback
-                        onPress={() => Keyboard.dismiss()}
-                    >
+                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                         <View style={styles.form}>
                             <View style={styles.header}>
                                 <Text style={styles.emoji}>
