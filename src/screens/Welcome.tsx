@@ -12,11 +12,12 @@ import { Feather } from "@expo/vector-icons";
 
 import wateringImg from "../assets/watering.png";
 import colors from "../styles/colors";
+import fonts from "../styles/fonts";
 
 const Welcome = () => {
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
+            <View style={styles.wrapper}>
                 <Text style={styles.title}>
                     Manage{"\n"}
                     your plants{"\n"}
@@ -33,9 +34,11 @@ const Welcome = () => {
                     you whenever you need
                 </Text>
                 <TouchableOpacity style={styles.button} activeOpacity={0.6}>
-                    <Text style={styles.buttonIcon}>
-                        <Feather name="chevron-right" size={32} />
-                    </Text>
+                    <Feather
+                        style={styles.buttonIcon}
+                        name="chevron-right"
+                        size={32}
+                    />
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
@@ -45,15 +48,21 @@ const Welcome = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    wrapper: {
+        flex: 1,
         alignItems: "center",
         justifyContent: "space-around",
+        paddingHorizontal: 16,
     },
     title: {
         fontSize: 32,
+        fontFamily: fonts.heading,
         fontWeight: "bold",
         textAlign: "center",
         color: colors.heading,
         marginTop: 40,
+        lineHeight: 40,
     },
     image: {
         // width: 292,
@@ -63,6 +72,7 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         fontSize: 18,
+        fontFamily: fonts.text,
         textAlign: "center",
         paddingHorizontal: 20,
         color: colors.heading,
@@ -79,8 +89,6 @@ const styles = StyleSheet.create({
     buttonIcon: {
         flexDirection: "row",
         color: colors.white,
-        alignItems: "center",
-        justifyContent: "center",
     },
 });
 
