@@ -1,8 +1,15 @@
 import React from "react";
-import { View, Text, StyleSheet, SafeAreaView, Image } from "react-native";
+import {
+    View,
+    Text,
+    StyleSheet,
+    SafeAreaView,
+    Image,
+    TouchableOpacity,
+    Dimensions,
+} from "react-native";
 
 import wateringImg from "../assets/watering.png";
-import Button from "../components/Button";
 import colors from "../styles/colors";
 
 const Welcome = () => {
@@ -14,12 +21,19 @@ const Welcome = () => {
                     your plants{"\n"}
                     easily
                 </Text>
-                <Image source={wateringImg} style={styles.image} />
+                <Image
+                    source={wateringImg}
+                    style={styles.image}
+                    // Hack for responsive used with Dimensions.get("window")
+                    resizeMode="contain"
+                />
                 <Text style={styles.subtitle}>
                     Don't forget to water your plants. We take care to remember
                     you whenever you need
                 </Text>
-                <Button text="Next" />
+                <TouchableOpacity style={styles.button} activeOpacity={0.6}>
+                    <Text style={styles.buttonText}>{">"}</Text>
+                </TouchableOpacity>
             </View>
         </SafeAreaView>
     );
@@ -39,14 +53,31 @@ const styles = StyleSheet.create({
         marginTop: 40,
     },
     image: {
-        width: 292,
-        height: 284,
+        // width: 292,
+        // height: 284,
+        // Hack for responsive
+        height: Dimensions.get("window").width * 0.7,
     },
     subtitle: {
         fontSize: 18,
         textAlign: "center",
         paddingHorizontal: 20,
         color: colors.heading,
+    },
+    button: {
+        backgroundColor: colors.green,
+        justifyContent: "center",
+        alignItems: "center",
+        paddingHorizontal: 16,
+        borderRadius: 16,
+        marginBottom: 8,
+        height: 56,
+        width: 56,
+    },
+    buttonText: {
+        color: colors.white,
+        fontWeight: "bold",
+        fontSize: 24,
     },
 });
 
