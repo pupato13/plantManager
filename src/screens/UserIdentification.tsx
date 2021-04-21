@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
     View,
     Text,
@@ -18,6 +19,11 @@ const UserIdentification = () => {
     const [isFocused, setIsFocused] = useState(false);
     const [isFilled, setIsFilled] = useState(false);
     const [name, setName] = useState<string>();
+    const navigation = useNavigation();
+
+    function handleSubmit() {
+        navigation.navigate("Confirmation");
+    }
 
     function handleInputBlur() {
         setIsFocused(false);
@@ -68,7 +74,7 @@ const UserIdentification = () => {
                                 onChangeText={handleInputChange}
                             />
                             <View style={styles.footer}>
-                                <Button text="Confirm" />
+                                <Button text="Confirm" onPress={handleSubmit} />
                             </View>
                         </View>
                     </TouchableWithoutFeedback>
