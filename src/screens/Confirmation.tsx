@@ -68,7 +68,7 @@ const Confirmation = () => {
                                 onChangeText={handleInputChange}
                             />
                             <View style={styles.footer}>
-                                <Button text="Confirm" />
+                                <Button text="Start" />
                             </View>
                         </View>
                     </TouchableWithoutFeedback>
