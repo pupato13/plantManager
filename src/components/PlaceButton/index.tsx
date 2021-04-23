@@ -34,8 +34,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         backgroundColor: colors.shape,
         height: 40,
-        width: 72,
+        minWidth: 72,
         marginHorizontal: 8,
+        padding: 8,
         borderRadius: 10,
     },
     containerActive: {
