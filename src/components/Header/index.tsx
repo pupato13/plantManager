@@ -19,13 +19,10 @@ const Header = () => {
 
 const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        paddingVertical: 16,
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
         marginTop: getStatusBarHeight(),
-        paddingHorizontal: 24,
     },
     greetings: {
         fontSize: 32,
