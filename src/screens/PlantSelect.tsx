@@ -117,6 +117,7 @@ const PlantSelect = () => {
 
             <View>
                 <FlatList
+                    keyExtractor={(place) => String(place.key)}
                     data={places}
                     horizontal
                     showsHorizontalScrollIndicator={false}
@@ -133,9 +134,10 @@ const PlantSelect = () => {
 
             <View style={styles.plants}>
                 <FlatList
+                    keyExtractor={(plant) => String(plant.id)}
+                    data={filteredPlants}
                     showsVerticalScrollIndicator={false}
                     numColumns={2}
-                    data={filteredPlants}
                     renderItem={({ item }) => <PlantCardPrimary data={item} />}
                     onEndReachedThreshold={0.1}
                     onEndReached={({ distanceFromEnd }) =>
