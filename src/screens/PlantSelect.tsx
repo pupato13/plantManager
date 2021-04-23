@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import {
+    View,
+    Text,
+    StyleSheet,
+    FlatList,
+    ActivityIndicator,
+} from "react-native";
 import Header from "../components/Header";
 import Loading from "../components/Loading";
 import PlaceButton from "../components/PlaceButton";
@@ -32,6 +38,9 @@ const PlantSelect = () => {
     const [filteredPlants, setFilteredPlants] = useState<IPlantProps[]>([]);
     const [selectedPlace, setSelectedPlace] = useState("all");
     const [isLoading, setIsLoading] = useState(true);
+    const [page, setPage] = useState(1);
+    const [loadMore, setLoadMore] = useState(true);
+    const [hasLoadedAll, setHasLoadedAll] = useState(false);
 
     async function fetchPlaces() {
         const { data } = await api.get(
@@ -48,11 +57,22 @@ const PlantSelect = () => {
     }
 
     async function fetchPlants() {
-        const { data } = await api.get("plants?_sort=name&_order=asc");
+        const { data } = await api.get(
+            `plants?_sort=name&_order=asc&_page=${page}&_limit=8`
+        );
 
-        setPlants(data);
-        setFilteredPlants(data);
+        if (!data) return setIsLoading(true);
+
+        if (page > 1) {
+            setPlants((prevState) => [...prevState, ...data]);
+            setFilteredPlants((prevState) => [...prevState, ...data]);
+        } else {
+            setPlants(data);
+            setFilteredPlants(data);
+        }
+
         setIsLoading(false);
+        setLoadMore(false);
     }
 
     useEffect(() => {
@@ -73,6 +93,14 @@ const PlantSelect = () => {
         );
 
         setFilteredPlants(filtered);
+    }
+
+    async function handleFetchMorePlants(distance: number) {
+        if (distance < 1) return;
+
+        setLoadMore(true);
+        setPage((prevState) => prevState + 1);
+        await fetchPlants();
     }
 
     if (isLoading) return <Loading />;
@@ -109,6 +137,17 @@ const PlantSelect = () => {
                     numColumns={2}
                     data={filteredPlants}
                     renderItem={({ item }) => <PlantCardPrimary data={item} />}
+                    onEndReachedThreshold={0.1}
+                    onEndReached={({ distanceFromEnd }) =>
+                        handleFetchMorePlants(distanceFromEnd)
+                    }
+                    ListFooterComponent={
+                        loadMore ? (
+                            <ActivityIndicator color={colors.green} />
+                        ) : (
+                            <></>
+                        )
+                    }
                 />
             </View>
         </View>
