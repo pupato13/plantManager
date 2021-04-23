@@ -1,5 +1,5 @@
 // @plantManager:user
 
-const UserName = "@plantManager:user";
+const UserNameKey = "@plantManager:user";
 
-export { UserName };
+export { UserNameKey };

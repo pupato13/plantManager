@@ -16,7 +16,7 @@ import {
 import Button from "../components/Button";
 import colors from "../styles/colors";
 import fonts from "../styles/fonts";
-import { UserName } from "../storageKeys/asyncStorageKeys";
+import { UserNameKey } from "../storageKeys/asyncStorageKeys";
 
 const UserIdentification = () => {
     const [isFocused, setIsFocused] = useState(false);
@@ -31,7 +31,7 @@ const UserIdentification = () => {
 
         // AsyncStorage.setItem("@plantManager:user", name);
 
-        await AsyncStorage.setItem(UserName, name);
+        await AsyncStorage.setItem(UserNameKey, name);
 
         navigation.navigate("Confirmation");
     }
