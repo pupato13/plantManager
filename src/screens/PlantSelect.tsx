@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import Header from "../components/Header";
+import Loading from "../components/Loading";
 import PlaceButton from "../components/PlaceButton";
 import PlantCardPrimary from "../components/PlantCardPrimary";
 import api from "../services/api";
@@ -30,6 +31,7 @@ const PlantSelect = () => {
     const [plants, setPlants] = useState<IPlantProps[]>([]);
     const [filteredPlants, setFilteredPlants] = useState<IPlantProps[]>([]);
     const [selectedPlace, setSelectedPlace] = useState("all");
+    const [isLoading, setIsLoading] = useState(true);
 
     async function fetchPlaces() {
         const { data } = await api.get(
@@ -50,6 +52,7 @@ const PlantSelect = () => {
 
         setPlants(data);
         setFilteredPlants(data);
+        setIsLoading(false);
     }
 
     useEffect(() => {
@@ -63,8 +66,6 @@ const PlantSelect = () => {
     function handleSelectedPlace(place: string) {
         setSelectedPlace(place);
 
-        console.log(place);
-
         if (place === "all") return setFilteredPlants(plants);
 
         const filtered = plants.filter((plant) =>
@@ -73,6 +74,8 @@ const PlantSelect = () => {
 
         setFilteredPlants(filtered);
     }
+
+    if (isLoading) return <Loading />;
 
     return (
         <View style={styles.container}>
