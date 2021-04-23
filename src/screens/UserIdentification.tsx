@@ -10,6 +10,7 @@ import {
     Platform,
     TouchableWithoutFeedback,
     Keyboard,
+    Alert,
 } from "react-native";
 import Button from "../components/Button";
 import colors from "../styles/colors";
@@ -22,6 +23,10 @@ const UserIdentification = () => {
     const navigation = useNavigation();
 
     function handleSubmit() {
+        if (!name) {
+            return Alert.alert("Ops", "Tell me your name first 😥");
+        }
+
         navigation.navigate("Confirmation");
     }
 
