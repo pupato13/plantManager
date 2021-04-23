@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 import {
     View,
     Text,
@@ -14,6 +15,12 @@ import colors from "../styles/colors";
 import fonts from "../styles/fonts";
 
 const Confirmation = () => {
+    const navigation = useNavigation();
+
+    function handleMoveOn() {
+        navigation.navigate("PlantSelect");
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <KeyboardAvoidingView
@@ -32,7 +39,7 @@ const Confirmation = () => {
                                 </Text>
                             </View>
                             <View style={styles.footer}>
-                                <Button text="Start" />
+                                <Button text="Start" onPress={handleMoveOn} />
                             </View>
                         </View>
                     </TouchableWithoutFeedback>
