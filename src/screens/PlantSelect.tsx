@@ -28,6 +28,7 @@ interface IPlantProps {
 const PlantSelect = () => {
     const [places, setPlaces] = useState<IPlaceProps[]>([]);
     const [plants, setPlants] = useState<IPlantProps[]>([]);
+    const [filteredPlants, setFilteredPlants] = useState<IPlantProps[]>([]);
     const [selectedPlace, setSelectedPlace] = useState("all");
 
     async function fetchPlaces() {
@@ -48,6 +49,7 @@ const PlantSelect = () => {
         const { data } = await api.get("plants?_sort=name&_order=asc");
 
         setPlants(data);
+        setFilteredPlants(data);
     }
 
     useEffect(() => {
@@ -60,6 +62,16 @@ const PlantSelect = () => {
 
     function handleSelectedPlace(place: string) {
         setSelectedPlace(place);
+
+        console.log(place);
+
+        if (place === "all") return setFilteredPlants(plants);
+
+        const filtered = plants.filter((plant) =>
+            plant.environments.includes(place)
+        );
+
+        setFilteredPlants(filtered);
     }
 
     return (
@@ -92,7 +104,7 @@ const PlantSelect = () => {
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     numColumns={2}
-                    data={plants}
+                    data={filteredPlants}
                     renderItem={({ item }) => <PlantCardPrimary data={item} />}
                 />
             </View>
