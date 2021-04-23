@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import {
     View,
     Text,
     StyleSheet,
     SafeAreaView,
-    TextInput,
     KeyboardAvoidingView,
     Platform,
     TouchableWithoutFeedback,
@@ -15,24 +14,6 @@ import colors from "../styles/colors";
 import fonts from "../styles/fonts";
 
 const Confirmation = () => {
-    const [isFocused, setIsFocused] = useState(false);
-    const [isFilled, setIsFilled] = useState(false);
-    const [name, setName] = useState<string>();
-
-    function handleInputBlur() {
-        setIsFocused(false);
-        setIsFilled(!!name);
-    }
-
-    function handleInputFocus() {
-        setIsFocused(true);
-    }
-
-    function handleInputChange(value: string) {
-        setIsFocused(!!value);
-        setName(value);
-    }
-
     return (
         <SafeAreaView style={styles.container}>
             <KeyboardAvoidingView
@@ -50,21 +31,6 @@ const Confirmation = () => {
                                     with love
                                 </Text>
                             </View>
-                            <TextInput
-                                style={[
-                                    styles.input,
-                                    (isFocused || isFilled) && {
-                                        borderColor: colors.green,
-                                    },
-                                ]}
-                                autoCorrect={false}
-                                autoFocus={false}
-                                autoCapitalize="words"
-                                placeholder="Enter your name"
-                                onBlur={handleInputBlur}
-                                onFocus={handleInputFocus}
-                                onChangeText={handleInputChange}
-                            />
                             <View style={styles.footer}>
                                 <Button text="Start" />
                             </View>
@@ -115,17 +81,6 @@ const styles = StyleSheet.create({
         color: colors.heading,
         fontFamily: fonts.text,
         paddingVertical: 10,
-    },
-    input: {
-        borderBottomWidth: 2,
-        borderColor: colors.gray,
-        color: colors.heading,
-        fontFamily: fonts.text,
-        width: "100%",
-        fontSize: 18,
-        marginTop: 48,
-        padding: 8,
-        textAlign: "center",
     },
     footer: {
         width: "100%",
