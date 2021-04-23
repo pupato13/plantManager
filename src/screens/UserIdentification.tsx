@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
     View,
     Text,
@@ -15,6 +16,7 @@ import {
 import Button from "../components/Button";
 import colors from "../styles/colors";
 import fonts from "../styles/fonts";
+import { UserName } from "../storageKeys/asyncStorageKeys";
 
 const UserIdentification = () => {
     const [isFocused, setIsFocused] = useState(false);
@@ -22,10 +24,14 @@ const UserIdentification = () => {
     const [name, setName] = useState<string>();
     const navigation = useNavigation();
 
-    function handleSubmit() {
+    async function handleSubmit() {
         if (!name) {
             return Alert.alert("Ops", "Tell me your name first 😥");
         }
+
+        // AsyncStorage.setItem("@plantManager:user", name);
+
+        await AsyncStorage.setItem(UserName, name);
 
         navigation.navigate("Confirmation");
     }
