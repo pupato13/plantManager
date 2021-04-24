@@ -9,7 +9,7 @@ import {
     TouchableOpacity,
 } from "react-native";
 import { getBottomSpace } from "react-native-iphone-x-helper";
-import { useRoute } from "@react-navigation/core";
+import { useNavigation, useRoute } from "@react-navigation/core";
 import { SvgFromUri } from "react-native-svg";
 import DateTimePicker, { Event } from "@react-native-community/datetimepicker";
 import { format, isBefore } from "date-fns";
@@ -28,6 +28,8 @@ interface IParams {
 const PlantDetail = () => {
     const [selectedDateTime, setSelectedDateTime] = useState(new Date());
     const [showDatePicker, setShowDatePicker] = useState(Platform.OS === "ios");
+
+    const navigation = useNavigation();
 
     const route = useRoute();
 
@@ -59,6 +61,15 @@ const PlantDetail = () => {
             await savePlant({
                 ...plant,
                 dateTimeNotification: selectedDateTime,
+            });
+
+            navigation.navigate("Confirmation", {
+                title: "All good",
+                subtitle:
+                    "Now we'll remind you to take care of your plant with love",
+                buttonTitle: "Thank you",
+                icon: "hug",
+                nextScreen: "MyPlants",
             });
         } catch (error) {
             Alert.alert("Ops", "It was not possible to save your changes! 😥");
