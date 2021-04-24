@@ -16,14 +16,14 @@ export default function App() {
     });
 
     useEffect(() => {
-        // const subscriptionNotifications = Notifications.addNotificationReceivedListener(
-        //     async (notifications) => {
-        //         const data = notifications.request.content.data
-        //             .plant as IPlantProps;
-        //         console.log(data);
-        //     }
-        // );
-        // return () => subscriptionNotifications.remove();
+        const subscriptionNotifications = Notifications.addNotificationReceivedListener(
+            async (notifications) => {
+                const data = notifications.request.content.data
+                    .plant as IPlantProps;
+                console.log(data);
+            }
+        );
+        return () => subscriptionNotifications.remove();
         // async function notifications() {
         //     // await Notifications.cancelAllScheduledNotificationsAsync();
         //     // const data = await Notifications.getAllScheduledNotificationsAsync();
