@@ -61,3 +61,13 @@ export async function getPlants(): Promise<IPlantProps[]> {
         throw new Error(error);
     }
 }
+
+export async function removePlant(id: string): Promise<void> {
+    const data = await AsyncStorage.getItem(PlantsKey);
+
+    const plants = data ? (JSON.parse(data) as IStoragePlantProps) : {};
+
+    delete plants[id];
+
+    await AsyncStorage.setItem(PlantsKey, JSON.stringify(plants));
+}
