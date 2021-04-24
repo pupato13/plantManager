@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { PlantsKey } from "../types/asyncStorageKeys";
 import { IPlantProps } from "../types/plant";
 
-interface IStoragePlantProps {
+export interface IStoragePlantProps {
     [id: string]: {
         data: IPlantProps;
     };
