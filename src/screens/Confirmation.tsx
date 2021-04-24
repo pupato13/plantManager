@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import {
     View,
     Text,
@@ -14,11 +14,33 @@ import Button from "../components/Button";
 import colors from "../styles/colors";
 import fonts from "../styles/fonts";
 
+interface IConfirmationParams {
+    title: string;
+    subtitle: string;
+    buttonTitle: string;
+    icon: "smile" | "hug";
+    nextScreen: string;
+}
+
+const emojis = {
+    hug: "🤗",
+    smile: "😄",
+};
+
 const Confirmation = () => {
     const navigation = useNavigation();
+    const routes = useRoute();
+
+    const {
+        title,
+        subtitle,
+        buttonTitle,
+        icon,
+        nextScreen,
+    } = routes.params as IConfirmationParams;
 
     function handleMoveOn() {
-        navigation.navigate("PlantSelect");
+        navigation.navigate(nextScreen);
     }
 
     return (
@@ -31,15 +53,15 @@ const Confirmation = () => {
                     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                         <View style={styles.form}>
                             <View style={styles.header}>
-                                <Text style={styles.emoji}>😁</Text>
-                                <Text style={styles.title}>Ready</Text>
-                                <Text style={styles.subtitle}>
-                                    Now let's start taking care of your plants
-                                    with love
-                                </Text>
+                                <Text style={styles.emoji}>{emojis[icon]}</Text>
+                                <Text style={styles.title}>{title}</Text>
+                                <Text style={styles.subtitle}>{subtitle}</Text>
                             </View>
                             <View style={styles.footer}>
-                                <Button text="Start" onPress={handleMoveOn} />
+                                <Button
+                                    text={buttonTitle}
+                                    onPress={handleMoveOn}
+                                />
                             </View>
                         </View>
                     </TouchableWithoutFeedback>
