@@ -5,12 +5,14 @@ import Welcome from "../screens/Welcome";
 import UserIdentification from "../screens/UserIdentification";
 import Confirmation from "../screens/Confirmation";
 import PlantSelect from "../screens/PlantSelect";
+import PlantDetail from "../screens/PlantDetail";
 import colors from "../styles/colors";
 
 const stackRoutes = createStackNavigator();
 
 const AppRoutes: React.FC = () => (
     <stackRoutes.Navigator
+        initialRouteName="PlantSelect"
         headerMode="none"
         screenOptions={{
             cardStyle: {
@@ -25,6 +27,7 @@ const AppRoutes: React.FC = () => (
         />
         <stackRoutes.Screen name="Confirmation" component={Confirmation} />
         <stackRoutes.Screen name="PlantSelect" component={PlantSelect} />
+        <stackRoutes.Screen name="PlantDetail" component={PlantDetail} />
     </stackRoutes.Navigator>
 );
 
