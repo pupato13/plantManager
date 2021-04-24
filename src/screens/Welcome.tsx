@@ -69,16 +69,12 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 32,
         fontFamily: fonts.heading,
-        fontWeight: "bold",
         textAlign: "center",
         color: colors.heading,
         marginTop: 40,
         lineHeight: 40,
     },
     image: {
-        // width: 292,
-        // height: 284,
-        // Hack for responsive
         height: Dimensions.get("window").width * 0.7,
     },
     subtitle: {
