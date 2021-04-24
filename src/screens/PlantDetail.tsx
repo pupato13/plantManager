@@ -14,11 +14,12 @@ import { SvgFromUri } from "react-native-svg";
 import DateTimePicker, { Event } from "@react-native-community/datetimepicker";
 import { format, isBefore } from "date-fns";
 
-import waterdrop from "../assets/waterdrop.png";
-import Button from "../components/Button";
 import colors from "../styles/colors";
 import fonts from "../styles/fonts";
+import waterdrop from "../assets/waterdrop.png";
+import Button from "../components/Button";
 import { IPlantProps } from "../types/plant";
+import { savePlant } from "../libs/storage";
 
 interface IParams {
     plant: IPlantProps;
@@ -51,6 +52,17 @@ const PlantDetail = () => {
 
     function handleOpenDateTimePickerForAndroid() {
         setShowDatePicker(!showDatePicker);
+    }
+
+    async function handleSave() {
+        try {
+            await savePlant({
+                ...plant,
+                dateTimeNotification: selectedDateTime,
+            });
+        } catch (error) {
+            Alert.alert("Ops", "It was not possible to save your changes! 😥");
+        }
     }
 
     return (
@@ -89,7 +101,7 @@ const PlantDetail = () => {
                     </TouchableOpacity>
                 )}
 
-                <Button text="Save Plant" onPress={() => {}} />
+                <Button text="Save Plant" onPress={handleSave} />
             </View>
         </View>
     );
