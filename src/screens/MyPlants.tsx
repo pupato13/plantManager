@@ -97,7 +97,6 @@ const MyPlants = () => {
                                 />
                             )}
                             showsVerticalScrollIndicator={false}
-                            contentContainerStyle={{ flex: 1 }}
                         />
                     </View>
                 </>
