@@ -6,6 +6,7 @@ import {
     FlatList,
     ActivityIndicator,
 } from "react-native";
+import { useNavigation } from "@react-navigation/core";
 import Header from "../components/Header";
 import Loading from "../components/Loading";
 import PlaceButton from "../components/PlaceButton";
@@ -40,6 +41,8 @@ const PlantSelect = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [page, setPage] = useState(1);
     const [loadMore, setLoadMore] = useState(true);
+
+    const navigation = useNavigation();
 
     async function fetchPlaces() {
         const { data } = await api.get(
@@ -102,6 +105,10 @@ const PlantSelect = () => {
         await fetchPlants();
     }
 
+    function handlePlantSelect(plant: IPlantProps) {
+        navigation.navigate("PlantDetail");
+    }
+
     if (isLoading) return <Loading />;
 
     return (
@@ -137,7 +144,12 @@ const PlantSelect = () => {
                     data={filteredPlants}
                     showsVerticalScrollIndicator={false}
                     numColumns={2}
-                    renderItem={({ item }) => <PlantCardPrimary data={item} />}
+                    renderItem={({ item }) => (
+                        <PlantCardPrimary
+                            data={item}
+                            onPress={() => handlePlantSelect(item)}
+                        />
+                    )}
                     onEndReachedThreshold={0.1}
                     onEndReached={({ distanceFromEnd }) =>
                         handleFetchMorePlants(distanceFromEnd)
