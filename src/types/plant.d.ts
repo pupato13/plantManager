@@ -9,5 +9,6 @@ export interface IPlantProps {
         times: number;
         repeat_every: string;
     };
+    hour: string;
     dateTimeNotification: Date;
 }
