@@ -29,12 +29,17 @@ const UserIdentification = () => {
             return Alert.alert("Ops", "Tell me your name first 😥");
         }
 
-        // AsyncStorage.setItem("@plantManager:user", name);
-
         try {
             await AsyncStorage.setItem(UserNameKey, name);
 
-            navigation.navigate("Confirmation");
+            navigation.navigate("Confirmation", {
+                title: "Ready",
+                subtitle:
+                    "Now let's start taking care of your plants with love",
+                buttonTitle: "Start",
+                icon: "smile",
+                nextScreen: "PlantSelect",
+            });
         } catch (error) {
             Alert.alert("Ops", "It was not possible to save your name 😓");
         }
