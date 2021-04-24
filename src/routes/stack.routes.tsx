@@ -4,16 +4,16 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Welcome from "../screens/Welcome";
 import UserIdentification from "../screens/UserIdentification";
 import Confirmation from "../screens/Confirmation";
-import PlantSelect from "../screens/PlantSelect";
 import PlantDetail from "../screens/PlantDetail";
 import MyPlants from "../screens/MyPlants";
 import colors from "../styles/colors";
+import AuthRoutes from "./tab.routes";
 
 const stackRoutes = createStackNavigator();
 
 const AppRoutes: React.FC = () => (
     <stackRoutes.Navigator
-        initialRouteName="PlantSelect"
+        // initialRouteName="PlantSelect"
         headerMode="none"
         screenOptions={{
             cardStyle: {
@@ -27,9 +27,9 @@ const AppRoutes: React.FC = () => (
             component={UserIdentification}
         />
         <stackRoutes.Screen name="Confirmation" component={Confirmation} />
-        <stackRoutes.Screen name="PlantSelect" component={PlantSelect} />
+        <stackRoutes.Screen name="PlantSelect" component={AuthRoutes} />
         <stackRoutes.Screen name="PlantDetail" component={PlantDetail} />
-        <stackRoutes.Screen name="MyPlants" component={MyPlants} />
+        <stackRoutes.Screen name="MyPlants" component={AuthRoutes} />
     </stackRoutes.Navigator>
 );
 
