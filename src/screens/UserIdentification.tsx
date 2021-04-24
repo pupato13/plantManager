@@ -31,9 +31,13 @@ const UserIdentification = () => {
 
         // AsyncStorage.setItem("@plantManager:user", name);
 
-        await AsyncStorage.setItem(UserNameKey, name);
+        try {
+            await AsyncStorage.setItem(UserNameKey, name);
 
-        navigation.navigate("Confirmation");
+            navigation.navigate("Confirmation");
+        } catch (error) {
+            Alert.alert("Ops", "It was not possible to save your name 😓");
+        }
     }
 
     function handleInputBlur() {
