@@ -31,3 +31,14 @@ export async function savePlant(plant: IPlantProps): Promise<void> {
         throw new Error(error);
     }
 }
+
+export async function getPlants(): Promise<IStoragePlantProps> {
+    try {
+        const data = await AsyncStorage.getItem(PlantsKey);
+        const plants = data ? (JSON.parse(data) as IStoragePlantProps) : {};
+
+        return plants;
+    } catch (error) {
+        throw new Error(error);
+    }
+}
