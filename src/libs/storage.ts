@@ -32,12 +32,31 @@ export async function savePlant(plant: IPlantProps): Promise<void> {
     }
 }
 
-export async function getPlants(): Promise<IStoragePlantProps> {
+export async function getPlants(): Promise<IPlantProps[]> {
     try {
         const data = await AsyncStorage.getItem(PlantsKey);
         const plants = data ? (JSON.parse(data) as IStoragePlantProps) : {};
 
-        return plants;
+        const sortedPlants = Object.keys(plants)
+            .map((plant) => {
+                return {
+                    ...plants[plant].data,
+                    hour: format(
+                        new Date(plants[plant].data.dateTimeNotification),
+                        "HH:mm"
+                    ),
+                };
+            })
+            .sort((a, b) =>
+                Math.floor(
+                    new Date(a.dateTimeNotification).getTime() / 1000 -
+                        Math.floor(
+                            new Date(b.dateTimeNotification).getTime() / 1000
+                        )
+                )
+            );
+
+        return sortedPlants;
     } catch (error) {
         throw new Error(error);
     }
