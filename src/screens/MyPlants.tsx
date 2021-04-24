@@ -19,6 +19,11 @@ const MyPlants = () => {
         async function loadStorageData() {
             const storedPlants = await getPlants();
 
+            if (storedPlants.length === 0) {
+                setIsLoading(false);
+                return;
+            }
+
             const nextTime = formatDistance(
                 new Date(storedPlants[0].dateTimeNotification).getTime(),
                 new Date().getTime(),
@@ -40,24 +45,37 @@ const MyPlants = () => {
         <View style={styles.container}>
             <Header />
 
-            <View style={styles.spotlight}>
-                <Image source={waterdrop} style={styles.spotlightImage} />
-                <Text style={styles.spotlightText}>{nextWatered}</Text>
-            </View>
+            {plants.length > 0 ? (
+                <>
+                    <View style={styles.spotlight}>
+                        <Image
+                            source={waterdrop}
+                            style={styles.spotlightImage}
+                        />
+                        <Text style={styles.spotlightText}>{nextWatered}</Text>
+                    </View>
 
-            <View style={styles.plants}>
-                <Text style={styles.plantsTitle}>Next Watered</Text>
+                    <View style={styles.plants}>
+                        <Text style={styles.plantsTitle}>Next Watered</Text>
 
-                <FlatList
-                    keyExtractor={(plant) => String(plant.id)}
-                    data={plants}
-                    renderItem={({ item }) => (
-                        <PlantCardSecondary data={item} />
-                    )}
-                    showsVerticalScrollIndicator={false}
-                    contentContainerStyle={{ flex: 1 }}
-                />
-            </View>
+                        <FlatList
+                            keyExtractor={(plant) => String(plant.id)}
+                            data={plants}
+                            renderItem={({ item }) => (
+                                <PlantCardSecondary data={item} />
+                            )}
+                            showsVerticalScrollIndicator={false}
+                            contentContainerStyle={{ flex: 1 }}
+                        />
+                    </View>
+                </>
+            ) : (
+                <View style={styles.messageEmptyContainer}>
+                    <Text style={styles.messageEmptyText}>
+                        You need to add a plant first 😎
+                    </Text>
+                </View>
+            )}
         </View>
     );
 };
@@ -98,6 +116,17 @@ const styles = StyleSheet.create({
         fontFamily: fonts.heading,
         color: colors.heading,
         marginVertical: 20,
+    },
+    messageEmptyContainer: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    messageEmptyText: {
+        fontSize: 32,
+        fontFamily: fonts.heading,
+        color: colors.green,
+        textAlign: "center",
     },
 });
 
