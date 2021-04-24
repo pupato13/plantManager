@@ -21,9 +21,10 @@ export async function savePlant(plant: IPlantProps): Promise<void> {
         if (repeat_every === "week") {
             const interval = Math.trunc(7 / times);
             nextTime.setDate(now.getDate() + interval);
-        } else {
-            nextTime.setDate(nextTime.getDate() + 1);
         }
+        // else {
+        //     nextTime.setDate(nextTime.getDate() + 1);
+        // }
 
         const seconds = Math.abs(
             Math.ceil(now.getTime() - nextTime.getTime()) / 1000
@@ -102,7 +103,12 @@ export async function removePlant(id: string): Promise<void> {
 
     const plants = data ? (JSON.parse(data) as IStoragePlantProps) : {};
 
+    const notificationId = plants[id] ? plants[id].notificationId : "";
+
     delete plants[id];
 
     await AsyncStorage.setItem(PlantsKey, JSON.stringify(plants));
+
+    if (!!notificationId)
+        await Notifications.cancelScheduledNotificationAsync(notificationId);
 }
