@@ -1,3 +1,4 @@
+const PlantsKey = "@plantManager:plants";
 const UserNameKey = "@plantManager:user";
 
-export { UserNameKey };
+export { PlantsKey, UserNameKey };
