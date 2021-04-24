@@ -14,24 +14,8 @@ import PlantCardPrimary from "../components/PlantCardPrimary";
 import api from "../services/api";
 import colors from "../styles/colors";
 import fonts from "../styles/fonts";
-
-interface IPlaceProps {
-    key: string;
-    title: string;
-}
-
-interface IPlantProps {
-    id: string;
-    name: string;
-    about: string;
-    water_tips: string;
-    photo: string;
-    environments: [string];
-    frequency: {
-        times: number;
-        repeat_every: string;
-    };
-}
+import { IPlantProps } from "../types/plant";
+import { IPlaceProps } from "../types/place";
 
 const PlantSelect = () => {
     const [places, setPlaces] = useState<IPlaceProps[]>([]);
@@ -106,7 +90,7 @@ const PlantSelect = () => {
     }
 
     function handlePlantSelect(plant: IPlantProps) {
-        navigation.navigate("PlantDetail");
+        navigation.navigate("PlantDetail", { plant });
     }
 
     if (isLoading) return <Loading />;
@@ -170,10 +154,7 @@ const PlantSelect = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // padding: 16,
         backgroundColor: colors.background,
-        // justifyContent: "center",
-        // alignItems: "center",
     },
     wrapper: {
         paddingHorizontal: 32,
