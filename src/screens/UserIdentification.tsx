@@ -16,7 +16,7 @@ import {
 import Button from "../components/Button";
 import colors from "../styles/colors";
 import fonts from "../styles/fonts";
-import { UserNameKey } from "../storageKeys/asyncStorageKeys";
+import { UserNameKey } from "../types/asyncStorageKeys";
 
 const UserIdentification = () => {
     const [isFocused, setIsFocused] = useState(false);

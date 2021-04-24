@@ -40,7 +40,6 @@ const PlantSelect = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [page, setPage] = useState(1);
     const [loadMore, setLoadMore] = useState(true);
-    const [hasLoadedAll, setHasLoadedAll] = useState(false);
 
     async function fetchPlaces() {
         const { data } = await api.get(

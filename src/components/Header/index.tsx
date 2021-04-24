@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 import Avatar from "../../assets/diego.png";
-import { UserNameKey } from "../../storageKeys/asyncStorageKeys";
+import { UserNameKey } from "../../types/asyncStorageKeys";
 import colors from "../../styles/colors";
 import fonts from "../../styles/fonts";
 
