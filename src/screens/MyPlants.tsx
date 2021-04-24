@@ -9,6 +9,7 @@ import { IPlantProps } from "../types/plant";
 import { getPlants } from "../libs/storage";
 import fonts from "../styles/fonts";
 import PlantCardSecondary from "../components/PlantCardSecondary";
+import Loading from "../components/Loading";
 
 const MyPlants = () => {
     const [plants, setPlants] = useState<IPlantProps[]>([]);
@@ -40,6 +41,8 @@ const MyPlants = () => {
 
         loadStorageData();
     }, []);
+
+    if (isLoading) return <Loading />;
 
     return (
         <View style={styles.container}>
